@@ -1,0 +1,33 @@
+public static void main(String[] args) {
+	
+		String val = "";
+	
+		try {
+			
+			File file = new File("PATH");
+			Workbook w = Workbook.getWorkbook(file);
+			Sheet s = w.getSheet(0);
+			Cell c = s.getCell(0, 0);
+		
+			if (c.getType() == CellType.LABEL) {
+				LabelCell lc = (LabelCell) c;
+				val = lc.getString();
+			}
+
+			if (c.getType() == CellType.NUMBER) {
+				NumberCell nc = (NumberCell) c;
+				val = nc.getValue()+"";
+			}
+
+			if (c.getType() == CellType.DATE) {
+				DateCell dc = (DateCell) c;
+				val = dc.getDate().toString();
+			} 
+			
+			System.out.println(val);
+			
+		} catch (Exception e) {
+			System.out.println("Unablr to read the excel");
+		}
+	
+	}
